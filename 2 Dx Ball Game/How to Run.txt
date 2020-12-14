@@ -1,0 +1,10 @@
+System requirements:
+- windows 7 (otherwise microsoft visual c++ won't get installed)
+- Microsoft visual c++ 6
+
+Steps to follow:
+- open the iMain.cpp file in Microsoft Visual C++ 6
+- build the file
+- finally execute the file.
+  
+All rights reserved to Mohammad Imam Hossain
