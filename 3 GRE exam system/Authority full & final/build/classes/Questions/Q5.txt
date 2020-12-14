@@ -1,0 +1,7 @@
+Which of the following integers are multiples of both 2 and 3?
+(A) 8
+(B) 9
+(C) 12
+(D) 18
+(E) 21
+(F) 36

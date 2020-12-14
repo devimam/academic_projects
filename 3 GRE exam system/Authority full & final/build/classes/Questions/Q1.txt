@@ -1,0 +1,6 @@
+If 5x+32=4-2x what is the value of x?
+(A) -4
+(B) -3
+(C) 4
+(D) 7
+(E) 12

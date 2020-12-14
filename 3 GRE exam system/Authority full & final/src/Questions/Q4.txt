@@ -1,0 +1,6 @@
+A certain jar contains 60 jelly beans � 22 white, 18 green, 11 yellow, 5 red and 4 purple. If a jelly bean is to be chosen at random, what is the probability that the jelly bean will be neither red nor purple?
+(A) 0.09
+(B) 0.15
+(C) 0.54
+(D) 0.85
+(E) 0.91

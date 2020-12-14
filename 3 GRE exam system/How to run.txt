@@ -1,0 +1,5 @@
+- Open both projects in netbeans
+- First run the authority projects
+- Then run file the Examcenter project
+
+enjoy !!!!
