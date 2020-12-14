@@ -1,0 +1,246 @@
+# include "iGraphics.h"
+/* 
+	function iDraw() is called again and again by the system.
+*/
+
+int isstart=0,bx,by,isshow,num=0,slidex=562+75,flag=0,centerx=612,centery=30,dx=6,dy=6,icheckleft=0,icheckright=0,ichecktop=0;
+
+float brick[1000][3];
+
+void iDraw()
+{
+	iClear();
+	if(isstart==0){
+		iShowBMP(100,0,"starting image.bmp");
+		iSetcolor(1,0,1);
+		iFilledRectangle(slidex-75,5,150,15);
+		iSetcolor(0,1,0);
+		iFilledCircle(centerx,centery,10,200);
+		for(by=694;by>538;by-=26){
+			for(bx=1;bx<1224;bx+=51){
+				iSetcolor(1,1,0);
+				iFilledRectangle(bx,by,50,25);
+				brick[num][0]=bx;
+				brick[num][1]=by;
+				brick[num][2]=0;
+				//printf("%f %f %f",brick[num][0],brick[num][1],brick[num][2]);
+				num++;
+			}
+		}
+		isstart=1;
+	}
+	else if(isstart==1){
+		icheckleft=0;
+		icheckright=0;
+		ichecktop=0;
+		iShowBMP(100,0,"starting image.bmp");
+		iSetcolor(1,0,1);
+		iFilledRectangle(slidex-75,5,150,15);
+		for(isshow=0;isshow<num;isshow++){
+			if(brick[isshow][2]==0){
+				iSetcolor(1,1,0);
+				iFilledRectangle(brick[isshow][0],brick[isshow][1],50,25);
+			}
+		}
+		
+		for(isshow=0;isshow<num;isshow++){
+			if(brick[isshow][2]==0){
+				if(centery+10>=brick[isshow][1]){
+					ichecktop=1;
+					brick[isshow][2]=1;
+					break;
+				}
+				else if(centerx+10>=brick[isshow][0] && centery>=brick[isshow][1]){
+					icheckright=1;
+					brick[isshow][2]=1;
+					break;
+				}
+				else if(centerx-10<=brick[isshow][0] && centery>=brick[isshow][1]){
+					icheckleft=1;
+					brick[isshow][2]=1;
+					break;
+				}
+			}
+		}
+		
+		if(flag==2){
+			if(ichecktop==0 && icheckright==0 && icheckleft==0 && centerx+10<1224){
+				iSetcolor(0,1,0);
+				iFilledCircle(centerx+=dx,centery+=dy,10,200);
+				flag=2;
+			}
+			else if(ichecktop==0 && icheckright==0 && icheckleft==0 && centerx+10>=1224) flag=5;
+			else flag=3;
+		}
+
+		if(flag==5){
+			if(ichecktop==0 && icheckright==0 && icheckleft==0 && centerx-10>0){
+				iSetcolor(0,1,0);
+				iFilledCircle(centerx-=dx,centery+=dy,10,200);
+				flag=5;
+			}
+			else if(ichecktop==0 && icheckright==0 && icheckleft==0 && centerx-10<0) flag=2;
+			else flag=3;
+		}
+
+		if(flag==3){
+			if(centerx+10<=1224 && centery-10>=30){
+			iSetcolor(0,1,0);
+			iFilledCircle(centerx+=dx,centery-=dy,10,200);
+			flag=3;
+			}
+			else if(centerx+10>1224) flag=4;
+			else if(centerx+10>=slidex && centerx+10<=slidex+75){
+				flag=2;
+				if(centerx-slidex<=5){
+					dx=2;
+					dy=6;
+				}
+				else if(centerx-slidex<=15){
+					dx=2;
+					dy=6;
+				}
+				else if(centerx-slidex>=45){
+					dx=6;
+					dy=2;
+				}
+				else{
+					dx=6;
+					dy=6;
+				}
+			}
+			else if(centerx+10>=slidex-75 && centerx+10<slidex){
+				flag=5;
+				if(slidex-centerx<=30){
+					dx=6;
+					dy=2;
+				}
+				else if(slidex-centerx<=60){
+					dx=6;
+					dy=6;
+				}
+				else if(slidex-centerx>=70){
+					dx=2;
+					dy=6;
+				}
+				else{
+					dx=0;
+					dy=6;
+				}
+			}
+			else{
+				isstart=0;
+				//iDelay(5);
+			}
+		}
+
+		if(flag==4){
+			if(centerx-10>=0 && centery-10>=30){
+			iSetcolor(0,1,0);
+			iFilledCircle(centerx-=dx,centery-=dy,10,200);
+			flag=4;
+			}
+			else if(centerx-10<0) flag=3;
+			else if(centerx-10<=slidex && centerx-10>=slidex-75){
+				flag=5;
+				if(slidex-centerx<=5){
+					dx=0;
+					dy=6;
+				}
+				else if(slidex-centerx<=10){
+					dx=1;
+					dy=6;
+				}
+				else if(slidex-centerx<=45){
+					dx=6;
+					dy=6;
+				}
+				else{
+					dx=6;
+					dy=1;
+				}
+			}
+			else if(centerx-10>slidex+50 && centerx-10<slidex+100){
+				flag=2;
+				if(centerx-slidex<=5){
+					dx=0;
+					dy=6;
+				}
+				else if(centerx-slidex<=15){
+					dx=1;
+					dy=6;
+				}
+				else if(centerx-slidex>=45){
+					dx=6;
+					dy=6;
+				}
+				else{
+					dx=6;
+					dy=1;
+				}
+			}
+			else{
+				isstart=0;
+				//iDelay(5);
+			}
+		}
+
+	}
+	//place your drawing codes here	
+}
+
+/* 
+	function iMouseMove() is called when the user presses and drags the mouse.
+	(mx, my) is the position where the mouse pointer is.
+*/
+void iMouseMove(int mx, int my)
+{
+	if(mx+75>=1224) slidex=1149;
+	else if(mx-75<0) slidex=75;
+	else slidex=mx;
+	//place your codes here
+}
+
+/* 
+	function iMouse() is called when the user presses/releases the mouse.
+	(mx, my) is the position where the mouse pointer is.
+*/
+void iMouse(int button, int state, int mx, int my)
+{
+	if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+	{
+		isstart=1;
+		if(mx>=612) flag=5;
+		else if(mx<612) flag=2;
+		centerx=mx;
+		centery=my;
+		//place your codes here	
+	}
+	if(button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+	{
+		isstart=1;
+		if(mx>=612) flag=5;
+		else if(mx<612) flag=2;
+		//place your codes here	
+	}
+}
+
+/*
+	function iKeyboard() is called whenever the user hits a key in keyboard.
+	key- holds the ASCII value of the key pressed.	
+*/
+void iKeyboard(unsigned char key)
+{
+	if(key == 'q')
+	{
+		exit(0);
+	}
+	//place your codes for other keys here
+}
+
+int main()
+{
+	//place your own initialization codes here. 	
+	iInitialize(1224,720, "<<<DX BALL GAME>>>");
+	return 0;
+}	
