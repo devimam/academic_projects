@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1480072845 source:d:\4-2 lectures\pattern recog lab\lab4\bmpread\main.cpp
+	<iostream>
+	<fstream>
+	<stdlib.h>
+

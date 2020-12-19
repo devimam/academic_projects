@@ -1,0 +1,497 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package template.matching;
+
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
+
+/**
+ *
+ * @author Imam
+ */
+public class TemplateMatching {
+
+    /**
+     * @param args the command line arguments
+     */
+    
+    public static void main(String[] args) {
+        
+        ///reading the image pixels into array
+        int ref1h,ref1w,ref2h,ref2w,testh,testw;
+        double ref1g[][]=new double[2000][2000];
+        double ref2g[][]=new double[2000][2000];
+        double testg[][]=new double[2000][2000];
+        double c[][]=new double[2000][2000];
+        
+        try {
+            // TODO code application logic here
+
+            BufferedImage ref1=ImageIO.read(new File("ref1.bmp"));
+            ref1h=ref1.getHeight();
+            ref1w=ref1.getWidth();
+            System.out.println(ref1h+" "+ref1w);
+            
+            for(int i=0;i<ref1w;i++){
+                for(int j=0;j<ref1h;j++){
+                    Color clr=new Color(ref1.getRGB(i,j));
+                    
+                    ref1g[i][j]=(clr.getRed()+clr.getGreen()+clr.getBlue())/(3.0*255);
+                }
+            }
+            
+            BufferedImage ref2=ImageIO.read(new File("ref2.bmp"));
+            ref2h=ref2.getHeight();
+            ref2w=ref2.getWidth();
+            System.out.println(ref2h+" "+ref2w);
+            
+            for(int i=0;i<ref2w;i++){
+                for(int j=0;j<ref2h;j++){
+                    Color clr=new Color(ref2.getRGB(i,j));
+                    
+                    ref2g[i][j]=(clr.getRed()+clr.getGreen()+clr.getBlue())/(3.0*255);
+                }
+            }
+         
+            BufferedImage test=ImageIO.read(new File("test.bmp"));
+            testh=test.getHeight();
+            testw=test.getWidth();
+            System.out.println(testh+" "+testw);
+            
+            for(int i=0;i<testw;i++){
+                for(int j=0;j<testh;j++){
+                    Color clr=new Color(test.getRGB(i,j));
+                    
+                    testg[i][j]=(clr.getRed()+clr.getGreen()+clr.getBlue())/(3.0*255);
+                }
+            }
+/*            
+            ///performing brute force
+            int minw=-1,minh=-1;
+            double minval=Double.POSITIVE_INFINITY;
+            for(int m=0;m<testw-ref1w+1;m++){
+                for(int n=0;n<testh-ref1h+1;n++){
+                       c[m][n]=0;
+                       for(int i=m;i<m+ref1w;i++){
+                           for(int j=n;j<n+ref1h;j++){
+                               c[m][n]+=Math.abs(testg[i][j]-ref1g[i-m][j-n]);
+                           }
+                       }
+                       if(c[m][n]<minval){
+                           minw=m;
+                           minh=n;
+                           minval=c[m][n];
+                       }
+                }
+            }
+            
+            System.out.println(minw+" "+minh+" "+minval);
+           
+            int minw2=-1,minh2=-1;
+            double minval2=Double.POSITIVE_INFINITY;
+            for(int m=0;m<testw-ref2w+1;m++){
+                for(int n=0;n<testh-ref2h+1;n++){
+                       c[m][n]=0;
+                       for(int i=m;i<m+ref2w;i++){
+                           for(int j=n;j<n+ref2h;j++){
+                               c[m][n]+=Math.abs(testg[i][j]-ref2g[i-m][j-n]);
+                           }
+                       }
+                       if(c[m][n]<minval2){
+                           minw2=m;
+                           minh2=n;
+                           minval2=c[m][n];
+                       }
+                }
+            }
+            
+            System.out.println(minw2+" "+minh2+" "+minval2);
+*/
+/*
+            
+            ///performing 2d logarithmic approach
+            int p=Math.min(testh,testw)/2;
+            int k=(int)Math.ceil(Math.log10(p)/Math.log10(2));
+            int d=(int) Math.pow(2, k-1);
+            int cx=(testw/2);
+            int cy=(testh/2);
+            
+            
+            
+            while(d>=1){
+                double maxval=Double.POSITIVE_INFINITY;
+                ///System.out.println(p+" "+k+" "+d+" "+cx+" "+cy);
+                
+                int maxw=-1,maxh=-1;
+                
+                int m=(int) (cx-(ref1w/2));
+                int n=(int) (cy-(ref1h/2));
+                
+                double tmp=0;
+                for(int i=m;i<m+ref1w;i++){
+                    for(int j=n;j<n+ref1h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref1g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=cx;
+                    maxh=cy;
+                    maxval=tmp;
+                }
+                
+                int c1x=cx-d;
+                int c1y=cy-d;
+                
+                m=(int) (c1x-(ref1w/2));
+                n=(int) (c1y-(ref1h/2));
+                
+                tmp=0;
+                for(int i=m;i<m+ref1w;i++){
+                    for(int j=n;j<n+ref1h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref1g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=c1x;
+                    maxh=c1y;
+                    maxval=tmp;
+                }
+                
+                int c2x=cx;
+                int c2y=cy-d;
+                
+                m=(int) (c2x-(ref1w/2));
+                n=(int) (c2y-(ref1h/2));
+                
+                tmp=0;
+                for(int i=m;i<m+ref1w;i++){
+                    for(int j=n;j<n+ref1h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref1g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=c2x;
+                    maxh=c2y;
+                    maxval=tmp;
+                }
+                
+                int c3x=cx+d;
+                int c3y=cy-d;
+                
+                m=(int) (c3x-(ref1w/2));
+                n=(int) (c3y-(ref1h/2));
+                
+                tmp=0;
+                for(int i=m;i<m+ref1w;i++){
+                    for(int j=n;j<n+ref1h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref1g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=c3x;
+                    maxh=c3y;
+                    maxval=tmp;
+                }
+                
+                int c4x=cx+d;
+                int c4y=cy;
+                
+                m=(int) (c4x-(ref1w/2));
+                n=(int) (c4y-(ref1h/2));
+                
+                tmp=0;
+                for(int i=m;i<m+ref1w;i++){
+                    for(int j=n;j<n+ref1h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref1g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=c4x;
+                    maxh=c4y;
+                    maxval=tmp;
+                }
+                
+                int c5x=cx+d;
+                int c5y=cy+d;
+                
+                m=(int) (c5x-(ref1w/2));
+                n=(int) (c5y-(ref1h/2));
+                
+                tmp=0;
+                for(int i=m;i<m+ref1w;i++){
+                    for(int j=n;j<n+ref1h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref1g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=c5x;
+                    maxh=c5y;
+                    maxval=tmp;
+                }
+                
+                int c6x=cx;
+                int c6y=cy+d;
+                
+                m=(int) (c6x-(ref1w/2));
+                n=(int) (c6y-(ref1h/2));
+                
+                tmp=0;
+                for(int i=m;i<m+ref1w;i++){
+                    for(int j=n;j<n+ref1h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref1g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=c6x;
+                    maxh=c6y;
+                    maxval=tmp;
+                }
+                
+                int c7x=cx-d;
+                int c7y=cy+d;
+                
+                m=(int) (c7x-(ref1w/2));
+                n=(int) (c7y-(ref1h/2));
+                
+                tmp=0;
+                for(int i=m;i<m+ref1w;i++){
+                    for(int j=n;j<n+ref1h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref1g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=c7x;
+                    maxh=c7y;
+                    maxval=tmp;
+                }
+                
+                int c8x=cx-d;
+                int c8y=cy;
+                
+                m=(int) (c8x-(ref1w/2));
+                n=(int) (c8y-(ref1h/2));
+                
+                tmp=0;
+                for(int i=m;i<m+ref1w;i++){
+                    for(int j=n;j<n+ref1h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref1g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=c8x;
+                    maxh=c8y;
+                    maxval=tmp;
+                }
+                
+                cx=maxw;
+                cy=maxh;
+                
+                p=p/2;
+                k=(int)Math.ceil(Math.log10(p)/Math.log10(2));
+                d=(int) Math.pow(2, k-1);
+                ///System.out.println(maxval);
+                if(maxval<0.0000000000000001) break;
+            }
+            
+            System.out.println(cx+" "+cy);
+*/
+           
+            int p=Math.min(testh,testw)/2;
+            int k=(int)Math.ceil(Math.log10(p)/Math.log10(2));
+            int d=(int) Math.pow(2, k-1);
+            int cx=(testw/2);
+            int cy=(testh/2);
+            
+            
+            
+            while(d>=1){
+                double maxval=Double.POSITIVE_INFINITY;
+                System.out.println(p+" "+k+" "+d+" "+cx+" "+cy);
+                
+                int maxw=-1,maxh=-1;
+                
+                int m=(int) (cx-(ref2w/2));
+                int n=(int) (cy-(ref2h/2));
+                
+                double tmp=0;
+                for(int i=m;i<m+ref2w;i++){
+                    for(int j=n;j<n+ref2h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref2g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=cx;
+                    maxh=cy;
+                    maxval=tmp;
+                }
+                
+                int c1x=cx-d;
+                int c1y=cy-d;
+                
+                m=(int) (c1x-(ref2w/2));
+                n=(int) (c1y-(ref2h/2));
+                
+                tmp=0;
+                for(int i=m;i<m+ref2w;i++){
+                    for(int j=n;j<n+ref2h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref2g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=c1x;
+                    maxh=c1y;
+                    maxval=tmp;
+                }
+                
+                int c2x=cx;
+                int c2y=cy-d;
+                
+                m=(int) (c2x-(ref2w/2));
+                n=(int) (c2y-(ref2h/2));
+                
+                tmp=0;
+                for(int i=m;i<m+ref2w;i++){
+                    for(int j=n;j<n+ref2h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref2g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=c2x;
+                    maxh=c2y;
+                    maxval=tmp;
+                }
+                
+                int c3x=cx+d;
+                int c3y=cy-d;
+                
+                m=(int) (c3x-(ref2w/2));
+                n=(int) (c3y-(ref2h/2));
+                
+                tmp=0;
+                for(int i=m;i<m+ref2w;i++){
+                    for(int j=n;j<n+ref2h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref2g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=c3x;
+                    maxh=c3y;
+                    maxval=tmp;
+                }
+                
+                int c4x=cx+d;
+                int c4y=cy;
+                
+                m=(int) (c4x-(ref2w/2));
+                n=(int) (c4y-(ref2h/2));
+                
+                tmp=0;
+                for(int i=m;i<m+ref2w;i++){
+                    for(int j=n;j<n+ref2h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref2g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=c4x;
+                    maxh=c4y;
+                    maxval=tmp;
+                }
+                
+                int c5x=cx+d;
+                int c5y=cy+d;
+                
+                m=(int) (c5x-(ref2w/2));
+                n=(int) (c5y-(ref2h/2));
+                
+                tmp=0;
+                for(int i=m;i<m+ref2w;i++){
+                    for(int j=n;j<n+ref2h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref2g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=c5x;
+                    maxh=c5y;
+                    maxval=tmp;
+                }
+                
+                int c6x=cx;
+                int c6y=cy+d;
+                
+                m=(int) (c6x-(ref2w/2));
+                n=(int) (c6y-(ref2h/2));
+                
+                tmp=0;
+                for(int i=m;i<m+ref2w;i++){
+                    for(int j=n;j<n+ref2h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref2g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=c6x;
+                    maxh=c6y;
+                    maxval=tmp;
+                }
+                
+                int c7x=cx-d;
+                int c7y=cy+d;
+                
+                m=(int) (c7x-(ref2w/2));
+                n=(int) (c7y-(ref2h/2));
+                
+                tmp=0;
+                for(int i=m;i<m+ref2w;i++){
+                    for(int j=n;j<n+ref2h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref2g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=c7x;
+                    maxh=c7y;
+                    maxval=tmp;
+                }
+                
+                int c8x=cx-d;
+                int c8y=cy;
+                
+                m=(int) (c8x-(ref2w/2));
+                n=(int) (c8y-(ref2h/2));
+                
+                tmp=0;
+                for(int i=m;i<m+ref2w;i++){
+                    for(int j=n;j<n+ref2h;j++){
+                        tmp+=Math.abs(testg[i][j]-ref2g[i-m][j-n]);
+                    }
+                }
+                if(tmp<maxval){
+                    maxw=c8x;
+                    maxh=c8y;
+                    maxval=tmp;
+                }
+                
+                cx=maxw;
+                cy=maxh;
+                
+                p=p/2;
+                k=(int)Math.ceil(Math.log10(p)/Math.log10(2));
+                d=(int) Math.pow(2, k-1);
+                ///System.out.println(maxval);
+                if(maxval<0.0000000000000000001) break;
+            }
+            
+            System.out.println(cx+" "+cy);
+            
+        } catch (IOException ex) {
+            ///Logger.getLogger(TemplateMatching.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Can't open the image file");
+        }
+    }
+    
+}

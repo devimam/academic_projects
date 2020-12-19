@@ -1,0 +1,28 @@
+# depslib dependency file v1.0
+1473357476 source:d:\4-2 lectures\machine learning\assignment_1\decision tree\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<math.h>
+	<map>
+	<ctime>
+	<cstdlib>
+
+1478883581 source:d:\4-2 lectures\machine learning\assignment 4\decision tree\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<math.h>
+	<map>
+	<ctime>
+	<cstdlib>
+
+1479459567 source:d:\4-2 lectures\machine learning\assignment 4\100%\decision tree\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<math.h>
+	<map>
+	<ctime>
+	<cstdlib>
+
