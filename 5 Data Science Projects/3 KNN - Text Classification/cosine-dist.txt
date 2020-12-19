@@ -1,0 +1,100 @@
+Calculating Cosine Similarity
+Accuracy with K= 1 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 2 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 3 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 4 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 5 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 6 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 7 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 8 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 9 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 10 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 11 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 12 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 13 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 14 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 15 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 16 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 17 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 18 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 19 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 20 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 21 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 22 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 23 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 24 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 25 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 26 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 27 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 28 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 29 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 30 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 31 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 32 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 33 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 34 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 35 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 36 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 37 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 38 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 39 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 40 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 41 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 42 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 43 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 44 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 45 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 46 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 47 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 48 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 49 is 57 % 
+Calculating Cosine Similarity
+Accuracy with K= 50 is 57 % 
