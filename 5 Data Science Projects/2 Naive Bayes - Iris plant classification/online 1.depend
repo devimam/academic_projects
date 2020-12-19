@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1474268112 source:d:\1105031\online 1\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<math.h>
+
