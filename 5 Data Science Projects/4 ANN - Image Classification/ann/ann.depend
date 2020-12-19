@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1477595578 source:d:\4-2 lectures\machine learning\assignment 3\cpp implementation\ann\main.cpp
+	<iostream>
+	<fstream>
+	<time.h>
+	<stdlib.h>
+	<math.h>
+
